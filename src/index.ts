@@ -19,6 +19,5 @@ const main = async (): Promise<void> => {
   app.listen(4000, () => console.log('Listening at port 4000'))
 }
 
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
 main()
-  .then(() => console.log('App Started'))
-  .catch(() => console.log('Something went wrong'))
