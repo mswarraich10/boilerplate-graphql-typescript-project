@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Field, ID, ObjectType } from 'type-graphql'
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,24 +6,24 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from 'typeorm'
 
 @ObjectType()
 @Entity()
 export class Newtable extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Field()
   @Column({ unique: true })
-  name: string;
+  name: string
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @Field()
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: Date
 }

@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType, Root } from 'type-graphql';
+import { Field, ID, ObjectType, Root } from 'type-graphql'
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,8 +7,8 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { Task } from './Task';
+} from 'typeorm'
+import { Task } from './Task'
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -20,38 +20,38 @@ export enum UserRole {
 export class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Field()
   @Column()
-  firstName: string;
+  firstName: string
 
   @Field()
   @Column()
-  lastName: string;
+  lastName: string
 
   @Field()
   @Column('text', { unique: true })
-  email: string;
+  email: string
 
   @Field()
   name(@Root() parent: User): string {
-    return `${parent.firstName} ${parent.lastName}`;
+    return `${parent.firstName} ${parent.lastName}`
   }
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @Field()
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: Date
 
   @Column()
-  password: string;
+  password: string
 
   @Column('bool', { default: false, nullable: true })
-  confirmed: boolean;
+  confirmed: boolean
 
   @Field()
   @Column({
@@ -59,8 +59,8 @@ export class User extends BaseEntity {
     enum: UserRole,
     default: UserRole.USER,
   })
-  role: UserRole;
+  role: UserRole
 
   @OneToMany(() => Task, (task) => task.user)
-  tasks: Task[];
+  tasks: Task[]
 }

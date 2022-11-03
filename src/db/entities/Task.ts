@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Field, ID, ObjectType } from 'type-graphql'
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,44 +9,44 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { TaskTag } from './TaskTag';
-import { User } from './User';
+} from 'typeorm'
+import { TaskTag } from './TaskTag'
+import { User } from './User'
 
 @ObjectType()
 @Entity()
 export class Task extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Field()
   @Column()
-  name: string;
+  name: string
 
   @Field()
   @Column()
-  description: string;
+  description: string
 
   @Field()
   @Column({ default: false })
-  isCompleted: boolean;
+  isCompleted: boolean
 
   @Column()
-  userId: number;
+  userId: number
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @Field()
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at: Date
 
   @ManyToOne(() => User, (user) => user.tasks, { onDelete: 'CASCADE' })
   @JoinColumn()
-  user: User;
+  user: User
 
   @OneToMany(() => TaskTag, (taskTag) => taskTag.task_id)
-  taskTag: TaskTag[];
+  taskTag: TaskTag[]
 }

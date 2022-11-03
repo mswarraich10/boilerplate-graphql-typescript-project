@@ -1,13 +1,13 @@
-import { MyContext } from 'src/types/MyContext';
-import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
-import { Inject, Service } from 'typedi';
-import { UserService } from '../service';
+import { MyContext } from 'src/types/MyContext'
+import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql'
+import { Inject, Service } from 'typedi'
+import { UserService } from '../service'
 
 @Service()
 @Resolver()
 export class UserDelete {
   @Inject()
-  private readonly userService: UserService;
+  private readonly userService: UserService
 
   /**
    *
@@ -20,7 +20,7 @@ export class UserDelete {
     @Arg('email') email: string,
     @Ctx() ctx: MyContext
   ): Promise<Boolean> {
-    const res = await this.userService._deleteUser(email, ctx);
-    return res;
+    const res = await this.userService._deleteUser(email, ctx)
+    return res
   }
 }

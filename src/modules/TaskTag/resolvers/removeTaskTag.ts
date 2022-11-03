@@ -1,12 +1,13 @@
-import { Arg, Authorized, Mutation, Resolver } from 'type-graphql';
-import { Inject, Service } from 'typedi';
-import { TaskTagService } from '../service';
+import { Arg, Authorized, Mutation, Resolver } from 'type-graphql'
+import { Inject, Service } from 'typedi'
+import { TaskTagService } from '../service'
 
 @Service()
 @Resolver()
 export class TaskTagRemove {
   @Inject()
-  private readonly taskTagService: TaskTagService;
+  private readonly taskTagService: TaskTagService
+
   /**
    *
    * @param task
@@ -19,11 +20,7 @@ export class TaskTagRemove {
     @Arg('task') task: number,
     @Arg('tag') tag: number
   ): Promise<boolean> {
-    try {
-      const taskTag = await this.taskTagService._removeTag(task, tag);
-      return taskTag;
-    } catch (e) {
-      throw new Error('Something went wrong!');
-    }
+    const taskTag = await this.taskTagService._removeTag(task, tag)
+    return taskTag
   }
 }

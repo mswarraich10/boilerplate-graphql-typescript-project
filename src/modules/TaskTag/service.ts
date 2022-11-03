@@ -1,11 +1,12 @@
-import { Service } from 'typedi';
-import { TaskTag } from '../../entity/TaskTag';
-import { TagService } from '../tag/service';
-import { ITaskTagService } from './interface';
+import { HTTP500Error, Messages } from '../../errors'
+import { Service } from 'typedi'
+import { TaskTag } from '../../db/entities/TaskTag'
+import { TagService } from '../tag/service'
+import { ITaskTagService } from './interface'
 
 @Service()
 export class TaskTagService implements ITaskTagService {
-  tagService = new TagService();
+  tagService = new TagService()
 
   /**
    *
@@ -17,22 +18,26 @@ export class TaskTagService implements ITaskTagService {
     taskId: number,
     tagName: string
   ): Promise<TaskTag | null> {
-    let tag = await this.tagService._getTag(tagName);
-    if (!tag)
-      tag = await this.tagService._createTag({
-        name: tagName,
-      });
-    const found = await TaskTag.findOne({
-      where: { tag_id: tag?.id, task_id: taskId },
-    });
-    if (found) return found;
+    try {
+      let tag = await this.tagService._getTag(tagName)
+      if (tag == null)
+        tag = await this.tagService._createTag({
+          name: tagName,
+        })
+      const found = await TaskTag.findOne({
+        where: { tag_id: tag?.id, task_id: taskId },
+      })
+      if (found != null) return found
 
-    const created = await TaskTag.create({
-      task_id: taskId,
-      tag_id: tag.id,
-    }).save();
-    if (created) return created;
-    return null;
+      const created = await TaskTag.create({
+        task_id: taskId,
+        tag_id: tag.id,
+      }).save()
+      if (created !== null) return created
+      return null
+    } catch (e) {
+      throw new HTTP500Error(Messages.SOMETHING_WENT_WRONG)
+    }
   }
 
   /**
@@ -42,8 +47,12 @@ export class TaskTagService implements ITaskTagService {
    * @returns true/false
    */
   async _removeTag(taskId: number, tagId: number): Promise<boolean> {
-    const res = await TaskTag.delete({ task_id: taskId, tag_id: tagId });
-    if (res.affected && res.affected >= 0) return true;
-    else return false;
+    try {
+      const res = await TaskTag.delete({ task_id: taskId, tag_id: tagId })
+      if (res.affected != null && res.affected >= 0) return true
+      else return false
+    } catch (e) {
+      throw new HTTP500Error(Messages.SOMETHING_WENT_WRONG)
+    }
   }
 }

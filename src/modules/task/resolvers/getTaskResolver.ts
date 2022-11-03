@@ -1,15 +1,15 @@
-import { Authorized, Ctx, Query, Resolver } from 'type-graphql';
-import { UserRole } from '../../../entity/User';
-import { MyContext } from '../../../types/MyContext';
-import { Task } from '../../../entity/Task';
-import { TaskService } from '../service';
-import { Inject, Service } from 'typedi';
+import { Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { UserRole } from '../../../db/entities/User'
+import { MyContext } from '../../../types/MyContext'
+import { Task } from '../../../db/entities/Task'
+import { TaskService } from '../service'
+import { Inject, Service } from 'typedi'
 
 @Service()
 @Resolver()
 export class TaskGet {
   @Inject()
-  private readonly taskService: TaskService;
+  private readonly taskService: TaskService
 
   /**
    *
@@ -18,12 +18,8 @@ export class TaskGet {
   @Authorized([UserRole.ADMIN])
   @Query(() => [Task])
   async allTask(): Promise<Task[]> {
-    try {
-      const tasks = await this.taskService._getAllTask();
-      return tasks;
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    const tasks = await this.taskService._getAllTask()
+    return tasks
   }
 
   /**
@@ -35,10 +31,10 @@ export class TaskGet {
   @Query(() => [Task], { nullable: true })
   async getMyTasks(@Ctx() ctx: MyContext): Promise<Task[] | null> {
     try {
-      const tasks = await this.taskService._getTaskByUser(ctx);
-      return tasks;
+      const tasks = await this.taskService._getTaskByUser(ctx)
+      return tasks
     } catch (e) {
-      throw new Error(e.message);
+      throw new Error(e.message)
     }
   }
 }

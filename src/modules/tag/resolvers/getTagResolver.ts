@@ -1,14 +1,14 @@
-import { Tag } from '../../../entity/Tag';
-import { Arg, Authorized, Query, Resolver } from 'type-graphql';
-import { TagService } from '../service';
-import { UserRole } from '../../../entity/User';
-import { Inject, Service } from 'typedi';
+import { Tag } from '../../../db/entities/Tag'
+import { Arg, Authorized, Query, Resolver } from 'type-graphql'
+import { TagService } from '../service'
+import { UserRole } from '../../../db/entities/User'
+import { Inject, Service } from 'typedi'
 
 @Service()
 @Resolver()
 export class TagGet {
   @Inject()
-  private readonly tagService: TagService;
+  private readonly tagService: TagService
 
   /**
    *
@@ -17,11 +17,7 @@ export class TagGet {
   @Authorized([UserRole.ADMIN])
   @Query(() => [Tag])
   async getAllTags(): Promise<Tag[] | null> {
-    try {
-      return await this.tagService._getAllTags();
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.tagService._getAllTags()
   }
 
   /**
@@ -32,10 +28,6 @@ export class TagGet {
   @Authorized()
   @Query(() => Tag)
   async getTag(@Arg('name') name: string): Promise<Tag | null> {
-    try {
-      return await this.tagService._getTag(name);
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.tagService._getTag(name)
   }
 }

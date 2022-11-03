@@ -1,7 +1,8 @@
-import { Service } from 'typedi';
-import { Tag } from '../../entity/Tag';
-import { ITagService } from './interface';
-import { TagCreateValidation } from './types';
+import { HTTP404Error, HTTP500Error, Messages } from '../../errors'
+import { Service } from 'typedi'
+import { Tag } from '../../db/entities/Tag'
+import { ITagService } from './interface'
+import { TagCreateValidation } from './types'
 
 @Service()
 export class TagService implements ITagService {
@@ -10,9 +11,9 @@ export class TagService implements ITagService {
    * @returns array of all tags
    */
   async _getAllTags(): Promise<Tag[] | null> {
-    const tags = await Tag.find();
-    if (tags.length === 0) throw new Error('No Tag found!');
-    return tags;
+    const tags = await Tag.find()
+    if (tags.length === 0) throw new HTTP404Error(Messages.TAGS_NOT_FOUND)
+    return tags
   }
 
   /**
@@ -21,9 +22,9 @@ export class TagService implements ITagService {
    * @returns tag
    */
   async _getTag(name: string): Promise<Tag | null> {
-    const tag = await Tag.findOne({ where: { name } });
-    if (!tag) return null;
-    return tag;
+    const tag = await Tag.findOne({ where: { name } })
+    if (tag === null) throw new HTTP404Error(Messages.TAG_NOT_FOUND)
+    return tag
   }
 
   /**
@@ -34,8 +35,12 @@ export class TagService implements ITagService {
   async _createTag(data: TagCreateValidation): Promise<Tag> {
     const tag = Tag.create({
       name: data.name,
-    });
-    return await tag.save();
+    })
+    try {
+      return await tag.save()
+    } catch (e) {
+      throw new HTTP500Error(Messages.SOMETHING_WENT_WRONG)
+    }
   }
 
   /**
@@ -45,10 +50,14 @@ export class TagService implements ITagService {
    * @returns tag
    */
   async _updateTag(id: number, data: TagCreateValidation): Promise<Tag> {
-    const tag = await Tag.findOne({ where: { id } });
-    if (!tag) throw new Error('Tag not found');
-    tag.name = data.name ?? tag.name;
-    return await tag.save();
+    const tag = await Tag.findOne({ where: { id } })
+    if (tag === null) throw new HTTP404Error(Messages.TAG_NOT_FOUND)
+    tag.name = data.name ?? tag.name
+    try {
+      return await tag.save()
+    } catch (e) {
+      throw new HTTP500Error(Messages.SOMETHING_WENT_WRONG)
+    }
   }
 
   /**
@@ -57,8 +66,12 @@ export class TagService implements ITagService {
    * @returns true/false
    */
   async _deleteTag(id: number): Promise<Boolean> {
-    const res = await Tag.delete({ id });
-    if (res.affected && res.affected >= 0) return true;
-    return false;
+    try {
+      const res = await Tag.delete({ id })
+      if (res.affected != null && res.affected >= 0) return true
+      return false
+    } catch (e) {
+      throw new HTTP500Error(Messages.SOMETHING_WENT_WRONG)
+    }
   }
 }

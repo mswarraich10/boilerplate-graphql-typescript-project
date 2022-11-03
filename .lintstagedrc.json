@@ -1,0 +1,4 @@
+{
+  "*.{js,jsx,ts,tsx}": "yarn run eslint",
+  "*.{js,jsx,ts,tsx,html,css}": "yarn run prettier --check ."
+}

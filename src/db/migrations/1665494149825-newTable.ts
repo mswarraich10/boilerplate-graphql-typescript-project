@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/prefer-includes */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {
   MigrationInterface,
   QueryRunner,
   Table,
   TableForeignKey,
-} from 'typeorm';
+} from 'typeorm'
 
 export class newTable1665494149825 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -32,7 +34,7 @@ export class newTable1665494149825 implements MigrationInterface {
         ],
       }),
       true
-    );
+    )
 
     await queryRunner.createForeignKey(
       'newtable',
@@ -42,16 +44,16 @@ export class newTable1665494149825 implements MigrationInterface {
         referencedTableName: 'user',
         onDelete: 'CASCADE',
       })
-    );
+    )
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const table = await queryRunner.getTable('newtable');
+    const table = await queryRunner.getTable('newtable')
     const fkey = table?.foreignKeys.find(
       (fk) => fk.columnNames.indexOf('userId') !== -1
-    );
-    await queryRunner.dropForeignKey('newtable', fkey!);
-    await queryRunner.dropColumn('newtable', 'userId');
-    await queryRunner.dropTable('newtable');
+    )
+    await queryRunner.dropForeignKey('newtable', fkey!)
+    await queryRunner.dropColumn('newtable', 'userId')
+    await queryRunner.dropTable('newtable')
   }
 }

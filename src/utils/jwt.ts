@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+dotenv.config()
 
 /**
  *
@@ -8,7 +8,7 @@ dotenv.config();
  * @returns true or flase
  */
 export function verifyJWT(token: string): any {
-  return jwt.verify(token, process.env.JWT_KEY!);
+  return jwt.verify(token, process.env.JWT_KEY ?? '')
 }
 
 /**
@@ -22,6 +22,6 @@ export function createJWt(data: any): string {
       email: data.email,
       role: data.role,
     },
-    process.env.JWT_KEY!
-  );
+    process.env.JWT_KEY ?? ''
+  )
 }

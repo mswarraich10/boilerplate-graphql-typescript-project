@@ -1,6 +1,6 @@
-import { TaskTag } from 'src/entity/TaskTag';
+import { TaskTag } from '../../db/entities/TaskTag'
 
 export interface ITaskTagService {
-  _createTaskTag(taskId: number, tag: string): Promise<TaskTag | null>;
-  _removeTag(taskId: number, tagId: number): Promise<boolean>;
+  _createTaskTag: (taskId: number, tag: string) => Promise<TaskTag | null>
+  _removeTag: (taskId: number, tagId: number) => Promise<boolean>
 }

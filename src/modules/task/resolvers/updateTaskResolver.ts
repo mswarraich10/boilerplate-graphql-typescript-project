@@ -1,15 +1,15 @@
-import { Task } from '../../../entity/Task';
-import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql';
-import { TaskService } from '../service';
-import { MyContext } from '../../../types/MyContext';
-import { TaskUpdateValidation } from '../types';
-import { Inject, Service } from 'typedi';
+import { Task } from '../../../db/entities/Task'
+import { Arg, Authorized, Ctx, Mutation, Resolver } from 'type-graphql'
+import { TaskService } from '../service'
+import { MyContext } from '../../../types/MyContext'
+import { TaskUpdateValidation } from '../types'
+import { Inject, Service } from 'typedi'
 
 @Service()
 @Resolver()
 export class TaskUpdate {
   @Inject()
-  private readonly taskService: TaskService;
+  private readonly taskService: TaskService
 
   /**
    *
@@ -23,10 +23,6 @@ export class TaskUpdate {
     @Arg('data') data: TaskUpdateValidation,
     @Ctx() ctx: MyContext
   ): Promise<Task> {
-    try {
-      return await this.taskService._updateTask(data, ctx);
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.taskService._updateTask(data, ctx)
   }
 }

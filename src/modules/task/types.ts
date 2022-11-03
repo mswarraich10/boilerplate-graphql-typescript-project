@@ -1,31 +1,31 @@
-import { Length } from 'class-validator';
-import { Field, InputType } from 'type-graphql';
+import { Length } from 'class-validator'
+import { Field, InputType } from 'type-graphql'
 
 @InputType()
 export class TaskCreateValidation {
   @Field()
   @Length(1, 50)
-  name: string;
+  name: string
 
   @Field()
-  description: string;
+  description: string
 
   @Field({ nullable: true })
-  isCompleted: boolean;
+  isCompleted: boolean
 }
 
 @InputType()
 export class TaskUpdateValidation {
   @Field()
-  id: number;
+  id: number
 
   @Field({ nullable: true })
   @Length(1, 50)
-  name: string;
+  name: string
 
   @Field({ nullable: true })
-  description: string;
+  description: string
 
   @Field({ nullable: true })
-  isCompleted: boolean;
+  isCompleted: boolean
 }
