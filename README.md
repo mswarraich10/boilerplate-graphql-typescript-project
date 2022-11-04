@@ -15,7 +15,7 @@
 - `yarn dev` to run nodemon development server
 - `yarn build` to compile typescript code
 - `yarn start` to run compiled code
-- `Table=<name> yarn migration:create` to create migration
+- `TableName=<name> yarn migration:create` to create migration
 - `yarn local-migration:run` to run migrations in dev
 - `yarn local-migration:revert` to revert migrations in dev
 - `yarn prod-migration:run` to run migrations on production

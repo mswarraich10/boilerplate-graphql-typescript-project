@@ -58,7 +58,7 @@
     "start": "ts-node ./dist/src/index.js",
     "prepare": "husky install",
     "typeorm": "typeorm-ts-node-commonjs",
-    "migration:create": "typeorm migration:create src/db/migrations/$Table",
+    "migration:create": "typeorm migration:create src/db/migrations/$TableName",
     "local-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/index.ts",
     "prod-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./dist/src/index.js",
     "local-migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/index.ts",
