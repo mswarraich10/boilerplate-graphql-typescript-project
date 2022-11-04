@@ -7,7 +7,7 @@ import Container from 'typedi'
 
 export async function getApolloServer(): Promise<any> {
   const schema = await buildSchema({
-    resolvers: [__dirname + '/modules/**/resolvers/*.ts'],
+    resolvers: [__dirname + '/modules/**/resolvers/*.{js,ts}'],
     validate: true,
     authChecker,
     container: Container,

@@ -9,6 +9,7 @@
     "class-validator": "^0.13.2",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
+    "cross-var": "^1.1.0",
     "express": "^4.18.2",
     "graphql": "15.7.2",
     "ioredis": "^5.2.4",
@@ -53,10 +54,15 @@
   "scripts": {
     "watch": "tsc -w",
     "dev": "nodemon",
-    "typeorm": "typeorm-ts-node-commonjs",
     "build": "rimraf ./dist && tsc",
     "start": "ts-node ./dist/src/index.js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "typeorm migration:create src/db/migrations/$Table",
+    "local-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/index.ts",
+    "prod-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./dist/src/index.js",
+    "local-migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/index.ts",
+    "prod-migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d ./dist/src/index.js"
   },
   "repository": "https://github.com/mswarraich10/-Week-4-Test-Project.git",
   "author": "Saif Warraich <msaif.ib10@gmail.com>"

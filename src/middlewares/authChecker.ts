@@ -3,7 +3,7 @@ import { AuthChecker } from 'type-graphql'
 import { MyContext } from '../types/MyContext'
 import { verifyJWT } from '../utils/jwt'
 import { JwtToken } from '../db/entities/JwtTokens'
-import { HTTP404Error, Messages } from '../errors'
+import { Messages } from '../errors'
 import { HTTP401Error } from '../errors/http401.error'
 
 /**
@@ -21,7 +21,7 @@ export const authChecker: AuthChecker<MyContext> = async (
   if (payload === null) return false
 
   const findUser = await User.findOne({ where: { email: payload.email } })
-  if (findUser == null) throw new HTTP404Error(Messages.USER_NOT_FOUND)
+  if (findUser == null) return false
 
   const oldToken = await JwtToken.findOne({ where: { userId: findUser.id } })
   if (oldToken?.token !== token)

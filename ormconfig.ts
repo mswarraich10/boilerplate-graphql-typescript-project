@@ -16,15 +16,15 @@ const defaultConfig = {
   logging: !(
     process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging'
   ),
-  entities: [rootDir + '/entities/*.ts'],
-  migrations: [rootDir + '/migration/*.ts'],
+  entities: [rootDir + '/entities/*.{js,ts}'],
+  migrations: [rootDir + '/migrations/*.{js,ts}'],
   migrationsTableName: 'migration',
   // seeds: [rootDir + '/seeds/*.{js,ts}'],
   // factories: [rootDir + '/seeds/factories/**/*.{js,ts}'],
   namingStrategy: new SnakeNamingStrategy(),
   cli: {
-    entitiesDir: [rootDir + '/entities'],
-    migrationsDir: __dirname + '/db/migration',
+    entitiesDir: [__dirname + './src/db/entities/'],
+    migrationsDir: [__dirname + './src/db/migrations/'],
   },
 }
 

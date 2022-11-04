@@ -18,6 +18,7 @@ export class UserGet {
   @Authorized([UserRole.ADMIN])
   @Query(() => [User])
   async allUser(): Promise<User[]> {
+    console.log('caledd all....')
     const users = await this.userService._getAllUsers()
     return users
   }
@@ -30,6 +31,7 @@ export class UserGet {
   @Authorized([UserRole.ADMIN])
   @Query(() => User, { nullable: true })
   async getSingleUser(@Arg('email') email: string): Promise<User | null> {
+    console.log('called single...')
     const user = await this.userService._getUser(email)
     return user
   }

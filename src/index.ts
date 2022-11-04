@@ -1,23 +1,25 @@
 import 'reflect-metadata'
 import express, { Express } from 'express'
-import { dataSource } from './db/dataSource'
+import manager from './db'
+import dotenv from 'dotenv'
 
 import { getApolloServer } from './apolloServer'
+dotenv.config()
 
 const main = async (): Promise<void> => {
-  dataSource
-    .initialize()
-    .then(() => console.log('Database connected'))
-    .catch(() => console.log('Something went wrong while connecting database'))
+  const port = process.env.PORT ?? 4000
+  await manager.init()
 
   const app: Express = express()
-  const apolloServer = await getApolloServer()
 
+  const apolloServer = await getApolloServer()
   await apolloServer.start()
   apolloServer.applyMiddleware({ app })
 
-  app.listen(4000, () => console.log('Listening at port 4000'))
+  app.listen(port, () => console.log(`Listening at port ${port}`))
 }
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 main()
+
+export default manager.datasource

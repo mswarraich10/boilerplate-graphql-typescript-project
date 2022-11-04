@@ -4,11 +4,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm'
-import { Task } from './Task'
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -60,7 +58,4 @@ export class User extends BaseEntity {
     default: UserRole.USER,
   })
   role: UserRole
-
-  @OneToMany(() => Task, (task) => task.user)
-  tasks: Task[]
 }

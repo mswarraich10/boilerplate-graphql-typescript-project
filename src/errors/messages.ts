@@ -21,7 +21,6 @@ export default {
   UNAUTHORIZED_ORGANIZATION: 'Unauthorized for this organization',
   AUTHORIZATION_TOKEN_MISSING: 'Unauthorized, Token Missing',
   INVALID_AUTHORIZATION_TOKEN: 'Invalid Authorization Token',
-  PARKING_LOCATIONS_NOT_FOUND: 'Parking Facilities not found',
   UNABLE_TO_UPDATE_USER_PASSWORD: 'Unable to update user password',
   INVALID_CONFIRMATION_TOKEN: 'Inavlid Confirmation Token',
 }
