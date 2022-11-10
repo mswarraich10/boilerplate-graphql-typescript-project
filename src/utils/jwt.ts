@@ -8,7 +8,7 @@ dotenv.config();
  * @returns true or flase
  */
 export function verifyJWT(token: string): any {
-  return jwt.verify(token, "G!u1[{'-.Hbrr(0&SOs,n~0iKhI64aC_)y;u-V+Yq0cRcr0xW");
+  return jwt.verify(token, process.env.JWT_KEY ?? '');
 }
 
 /**
