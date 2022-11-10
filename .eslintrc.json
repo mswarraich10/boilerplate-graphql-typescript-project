@@ -21,8 +21,8 @@
       }
     ],
     "no-tabs": ["error", { "allowIndentationTabs": true }],
-    "no-path-concat": "off"
-    // "semi": ["error", "always"]
+    "no-path-concat": "off",
+    "semi": ["error", "always"]
   },
   "plugins": ["prettier"]
 }
