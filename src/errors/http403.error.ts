@@ -1,5 +1,5 @@
-import { BaseError } from './base.error'
-import { HttpStatusCode, HttpStatusCodeName } from './codes'
+import { BaseError } from './base.error';
+import { HttpStatusCode, HttpStatusCodeName } from './codes';
 
 export class HTTP403Error extends BaseError {
   constructor(description: string) {
@@ -8,6 +8,6 @@ export class HTTP403Error extends BaseError {
       HttpStatusCode.FORBIDEN,
       description,
       true
-    )
+    );
   }
 }

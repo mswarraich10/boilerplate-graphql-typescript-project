@@ -32,6 +32,7 @@
     "@types/express": "^4.17.14",
     "@types/graphql": "^14.5.0",
     "@types/ioredis": "^5.0.0",
+    "@types/jest": "^29.2.2",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.11.9",
     "@types/nodemailer": "^6.4.6",
@@ -45,11 +46,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "husky": "^8.0.1",
+    "jest": "^29.2.2",
     "lint-staged": "^13.0.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1",
+    "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "typescript": "*"
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "watch": "tsc -w",
@@ -58,6 +61,7 @@
     "start": "ts-node ./dist/src/index.js",
     "prepare": "husky install",
     "typeorm": "typeorm-ts-node-commonjs",
+    "lint": "eslint . --ext .ts",
     "migration:create": "typeorm migration:create src/db/migrations/$TableName",
     "local-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/index.ts",
     "prod-migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d ./dist/src/index.js",

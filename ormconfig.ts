@@ -1,10 +1,10 @@
 /* eslint-disable n/no-path-concat */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
-import dotenv from 'dotenv'
-dotenv.config()
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const rootDir = __dirname + '/src/db'
+const rootDir = __dirname + '/src/db';
 const defaultConfig = {
   host: 'localhost',
   port: 5430,
@@ -26,6 +26,6 @@ const defaultConfig = {
     entitiesDir: [__dirname + './src/db/entities/'],
     migrationsDir: [__dirname + './src/db/migrations/'],
   },
-}
+};
 
-export default defaultConfig
+export default defaultConfig;

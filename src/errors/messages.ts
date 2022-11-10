@@ -23,4 +23,4 @@ export default {
   INVALID_AUTHORIZATION_TOKEN: 'Invalid Authorization Token',
   UNABLE_TO_UPDATE_USER_PASSWORD: 'Unable to update user password',
   INVALID_CONFIRMATION_TOKEN: 'Inavlid Confirmation Token',
-}
+};

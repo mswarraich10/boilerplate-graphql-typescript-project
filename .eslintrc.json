@@ -11,9 +11,17 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "singleQuote": true
+      }
+    ],
     "no-tabs": ["error", { "allowIndentationTabs": true }],
     "no-path-concat": "off"
+    // "semi": ["error", "always"]
   },
   "plugins": ["prettier"]
 }

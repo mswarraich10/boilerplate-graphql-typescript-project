@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { registerDecorator, ValidationOptions } from 'class-validator'
+import { registerDecorator, ValidationOptions } from 'class-validator';
 
 export function password(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
@@ -10,10 +10,10 @@ export function password(validationOptions?: ValidationOptions) {
       options: validationOptions,
       validator: {
         validate(value: any) {
-          const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
-          return typeof value === 'string' && specialChars.test(value)
+          const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+          return typeof value === 'string' && specialChars.test(value);
         },
       },
-    })
-  }
+    });
+  };
 }
