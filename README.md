@@ -1,4 +1,4 @@
-# Typescript Sample Project
+# Typescript Sample Project (GraphQL)
 
 ## Packages
 
